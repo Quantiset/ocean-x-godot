@@ -1,0 +1,26 @@
+{
+  "source": "OXR20260428_Bathy_Final_EM304_PalauLeg1_75m_WGS84UTM53N_fp.tif",
+  "width": 4067,
+  "height": 3497,
+  "cell_size_m": [
+    75.0,
+    75.0
+  ],
+  "utm_zone": "53N (EPSG:32653)",
+  "origin_utm_top_left": [
+    229200.0,
+    1055925.0
+  ],
+  "depth_min_m": -5048.4599609375,
+  "depth_max_m": -21.185604095458984,
+  "nodata": -9999.0,
+  "valid_fraction": 0.15555980084513762,
+  "filled": {
+    "heights": "bathy_filled.r32",
+    "source_mask": "bathy_source.u8",
+    "public_source": "SRTM15_PLUS Estimated Topography, 15 seconds, Global, v1 (NOAA ERDDAP srtm15plus, 15 arc-second)",
+    "depth_min_m": -8040.87353515625,
+    "depth_max_m": 293.97589111328125,
+    "blend_cells": 15
+  }
+}

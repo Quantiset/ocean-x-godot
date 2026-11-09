@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/bathymetry_terrain.gd" id="1_terrain"]
+[ext_resource type="Script" path="res://scripts/orbit_camera.gd" id="2_cam"]
+[ext_resource type="Script" path="res://scripts/water_column_probe.gd" id="3_probe"]
+[ext_resource type="Script" path="res://scripts/screenshot_tour.gd" id="4_tour"]
+
+[sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
+
+[sub_resource type="Sky" id="sky"]
+sky_material = SubResource("sky_mat")
+
+[sub_resource type="Environment" id="env"]
+background_mode = 2
+sky = SubResource("sky")
+ambient_light_source = 3
+ambient_light_energy = 0.6
+tonemap_mode = 2
+
+[node name="Bathymetry" type="Node3D"]
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+script = ExtResource("1_terrain")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.354, 0.354, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 50, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 1000.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+
+[node name="Camera" type="Camera3D" parent="."]
+far = 5000.0
+script = ExtResource("2_cam")
+
+[node name="WaterColumnProbe" type="Node3D" parent="." node_paths=PackedStringArray("terrain", "camera")]
+script = ExtResource("3_probe")
+terrain = NodePath("../Terrain")
+camera = NodePath("../Camera")
+
+[node name="ScreenshotTour" type="Node" parent="." node_paths=PackedStringArray("camera", "probe")]
+script = ExtResource("4_tour")
+camera = NodePath("../Camera")
+probe = NodePath("../WaterColumnProbe")
